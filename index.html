@@ -83,8 +83,10 @@
                                             <td class="col-lg-1"></td>
                                             <td class="col-lg-8">
                                                 <label>Options</label>
-                                                <p><input id="prefixColumn" type="checkbox" style="margin-top: 10px;" disabled=""> Create column for Item Prefix </p>
-                                                <p><input id="suffixColumn" type="checkbox" style="margin-top: 10px;" disabled=""> Create column for Item Suffix </p>
+                                                <p>
+                                                    <input id="prefixColumn" type="checkbox" style="margin-top: 10px;" disabled=""> Create column for Item Prefix </p>
+                                                <p>
+                                                    <input id="suffixColumn" type="checkbox" style="margin-top: 10px;" disabled=""> Create column for Item Suffix </p>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -100,100 +102,104 @@
                         </div>
                         <p>&nbsp;</p>
                         <div class="col-lg-10 col-lg-offset-2">
-                        <div class="form-group panel panel-success">
-                            <div class="panel-heading">
-                                <span class="panel-title">Output</span>
-                                <span id="copyOutputSpan"><span id="copyOutputMessage" class="label">&nbsp;</span><i class="fa fa-clipboard" aria-hidden="true" id="copyOutput" onclick="CopyOutput()"></i></span>
-                            </div>
-                            <div class="panel-body">
-                                <textarea readonly class="form-control" rows="10" id="generatedOutput"></textarea>
+                            <div class="form-group panel panel-success">
+                                <div class="panel-heading">
+                                    <span class="panel-title">Output</span>
+                                    <span id="copyOutputSpan">
+                                        <span id="copyOutputMessage" class="label">&nbsp;</span>
+                                        <i class="fa fa-clipboard" aria-hidden="true" id="copyOutput" onclick="CopyOutput()"></i>
+                                    </span>
+                                </div>
+                                <div class="panel-body">
+                                    <textarea readonly class="form-control" rows="10" id="generatedOutput"></textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </fieldset>
                 </form>
             </div>
             <div class="col-4">
                 <h3>Supported Syntax</h3>
                 <div class="panel panel-primary">
-                        <div class="panel-heading panel-title">All Formats</div>
-                <table class="table table-striped syntaxTable">
-                    <thead>
-                        <tr>
-                            <th>Effect</th>
-                            <th>Syntax</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Generate
-                                <br> Incrementing
-                                <br> Numbers
-                            </td>
-                            <td>
-                                <code>[numInc|<i>Increment</i>]</code>
-                                <br> i.e.
-                                <br>
-                                <code>[numInc|1]</code> = 1, 2, 3...
-                                <br>
-                                <code>[numInc|5]</code> = 5, 10, 15...</td>
-                        </tr>
-                        <tr>
-                            <td>Bold</td>
-                            <td>
-                                <code>[b]</code>text
-                                <code>[/b]</code>
-                            </td>
-                        </tr>
+                    <div class="panel-heading panel-title">All Formats</div>
+                    <table class="table table-striped syntaxTable">
+                        <thead>
+                            <tr>
+                                <th>Effect</th>
+                                <th>Syntax</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Generate
+                                    <br> Incrementing
+                                    <br> Numbers
+                                </td>
+                                <td>
+                                    <code>[numInc|<i>Increment</i>]</code>
+                                    <br> i.e.
+                                    <br>
+                                    <code>[numInc|1]</code> = 1, 2, 3...
+                                    <br>
+                                    <code>[numInc|5]</code> = 5, 10, 15...</td>
+                            </tr>
+                            <tr>
+                                <td>Bold</td>
+                                <td>
+                                    <code>[b]</code>text
+                                    <code>[/b]</code>
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>Italics</td>
-                            <td>
-                                <code>[i]</code>text
-                                <code>[/i]</code>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-                <div class="panel panel-primary"><div class="panel-title panel-heading">Homebrewery Only</div>
-                <table class="table table-striped syntaxTable">
-                    <thead>
-                        <tr>
-                            <th>Effect</th>
-                            <th>Syntax</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>--</td>
-                            <td>
-                                --
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                            <tr>
+                                <td>Italics</td>
+                                <td>
+                                    <code>[i]</code>text
+                                    <code>[/i]</code>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-title panel-heading">Homebrewery Only</div>
+                    <table class="table table-striped syntaxTable">
+                        <thead>
+                            <tr>
+                                <th>Effect</th>
+                                <th>Syntax</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>--</td>
+                                <td>
+                                    --
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                <div class="panel panel-primary"><div class="panel-title panel-heading">HTML Only</div>
-                <table class="table table-striped syntaxTable">
-                    <thead>
-                        <tr>
-                            <th>Effect</th>
-                            <th>Syntax</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Underline</td>
-                            <td>
-                                <code>[u]</code>text
-                                <code>[/u]</code>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <div class="panel panel-primary">
+                    <div class="panel-title panel-heading">HTML Only</div>
+                    <table class="table table-striped syntaxTable">
+                        <thead>
+                            <tr>
+                                <th>Effect</th>
+                                <th>Syntax</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>--</td>
+                                <td>
+                                    --
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

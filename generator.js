@@ -116,20 +116,20 @@ function RunMagicalMarkupGenerator() {
 
             return retValue;
         }
-        
-        return result; 
+
+        return result;
 
         // Parser for [b], [i], [u] Markup
         function ParseMarkup(text) {
             var parsedText;
 
-            if(Syntax.Bold.Supported)
+            if (Syntax.Bold.Supported)
                 parsedText = text.replace(RegexManager.Bold.BothTags, ReplaceBold)
-            
-            if(Syntax.Italic.Supported)
+
+            if (Syntax.Italic.Supported)
                 parsedText = parsedText.replace(RegexManager.Italic.BothTags, ReplaceItalic)
 
-            if(Syntax.Underline.Supported)
+            if (Syntax.Underline.Supported)
                 parsedText = parsedText.replace(RegexManager.Underline.BothTags, ReplaceUnderline)
 
             return parsedText;
@@ -232,13 +232,13 @@ function RunMagicalMarkupGenerator() {
             }
 
             result.Bold = {
-                Supported: true, 
+                Supported: true,
                 OpenTag: "<b>",
                 CloseTag: "</b>"
             }
 
             result.Italic = {
-                Supported: true,                
+                Supported: true,
                 OpenTag: "<i>",
                 CloseTag: "</i>"
             }
@@ -266,19 +266,21 @@ function RunMagicalMarkupGenerator() {
             }
 
             result.Bold = {
-                Supported: true, 
+                Supported: true,
                 OpenTag: "**",
                 CloseTag: "**"
             }
 
             result.Italic = {
-                Supported: true, 
+                Supported: true,
                 OpenTag: "*",
                 CloseTag: "*"
             }
-            
+
             result.Underline = {
-                Supported: false
+                Supported: true,
+                OpenTag: "<u>",
+                CloseTag: "</u>"
             }
 
             return result;
