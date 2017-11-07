@@ -91,6 +91,7 @@ function RunMagicalMarkupGenerator() {
             ParseOptions.ItemSuffix = Parser.ParseNumberIncrementer(itemSuffix);
         }
 
+        // Parser for [numInc|#] Markup
         result.ParseNumberIncrementer = function (text) {
 
             // Parse for other markup and create initial return value
@@ -118,10 +119,19 @@ function RunMagicalMarkupGenerator() {
         
         return result; 
 
+        // Parser for [b], [i], [u] Markup
         function ParseMarkup(text) {
             var parsedText;
-            parsedText = text.replace(RegexManager.Bold.BothTags, ReplaceBold)
-            parsedText = parsedText.replace(RegexManager.Italic.BothTags, ReplaceItalic)
+
+            if(Syntax.Bold.Supported)
+                parsedText = text.replace(RegexManager.Bold.BothTags, ReplaceBold)
+            
+            if(Syntax.Italic.Supported)
+                parsedText = parsedText.replace(RegexManager.Italic.BothTags, ReplaceItalic)
+
+            if(Syntax.Underline.Supported)
+                parsedText = parsedText.replace(RegexManager.Underline.BothTags, ReplaceUnderline)
+
             return parsedText;
 
             function ReplaceBold(text) {
@@ -133,6 +143,12 @@ function RunMagicalMarkupGenerator() {
             function ReplaceItalic(text) {
                 text = text.replace(RegexManager.Italic.OpenTag, Syntax.Italic.OpenTag);
                 text = text.replace(RegexManager.Italic.CloseTag, Syntax.Italic.CloseTag);
+                return text;
+            }
+
+            function ReplaceUnderline(text) {
+                text = text.replace(RegexManager.Underline.OpenTag, Syntax.Underline.OpenTag);
+                text = text.replace(RegexManager.Underline.CloseTag, Syntax.Underline.CloseTag);
                 return text;
             }
         }
@@ -216,13 +232,21 @@ function RunMagicalMarkupGenerator() {
             }
 
             result.Bold = {
+                Supported: true, 
                 OpenTag: "<b>",
                 CloseTag: "</b>"
             }
 
             result.Italic = {
+                Supported: true,                
                 OpenTag: "<i>",
                 CloseTag: "</i>"
+            }
+
+            result.Underline = {
+                Supported: true,
+                OpenTag: "<u>",
+                CloseTag: "</u>"
             }
 
             return result;
@@ -242,13 +266,19 @@ function RunMagicalMarkupGenerator() {
             }
 
             result.Bold = {
+                Supported: true, 
                 OpenTag: "**",
                 CloseTag: "**"
             }
 
             result.Italic = {
+                Supported: true, 
                 OpenTag: "*",
                 CloseTag: "*"
+            }
+            
+            result.Underline = {
+                Supported: false
             }
 
             return result;
