@@ -210,7 +210,7 @@ function RunMagicalMarkupGenerator() {
     // =========================================================================
     function SyntaxManager() {
 
-        switch (ParseOptions.Platform) {
+        switch (ParseOptions.Format) {
             case HOMEBREWERY:
                 return HomebrewerySyntax();
                 break;
@@ -374,13 +374,13 @@ function ReadFormData() {
     result.ItemList = (document.getElementById('itemList').value).split("\n");
 
     // Output Data
-    var tmpPlatform = document.getElementById('platform').value;
-    switch (tmpPlatform) {
+    var tmpFormat = document.getElementById('format').value;
+    switch (tmpFormat) {
         case "homebrewery":
-            result.Platform = HOMEBREWERY;
+            result.Format = HOMEBREWERY;
             break;
         default:
-            result.Platform = HTML;
+            result.Format = HTML;
     }
 
     // Table Options
