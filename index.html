@@ -1,0 +1,207 @@
+<html>
+
+<head>
+    <title>Magical Markup Generator</title>
+    <link rel="stylesheet" href="res/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="res/variables.less">
+    <link rel="stylesheet" href="res/bootstrap.min.css">
+    <link rel="stylesheet" href="res/overwrites.css">
+
+    <script src="generator.js"></script>
+    <script src="https://use.fontawesome.com/ae314bb12e.js"></script>
+</head>
+
+<body>
+    <p></p>
+    <div class="container panel panel-primary">
+        <div class="row panel-heading">
+            <div class="col panel-title">
+                <h2>Magical Markup Generator</h2>
+            </div>
+        </div>
+        <div class="row panel-body">
+            <div class="col-8" style="margin-top: 20px;">
+                <p>Yo! This is a tool to generate repetitive markups, i.e. a list or a table. Fill it out and let 'er rip!</p>
+
+                <h3>Generate Markup</h3>
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="itemPrefix" class="col-lg-2 control-label">Item Prefix</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="itemPrefix" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemSuffix" class="col-lg-2 control-label">Item Suffix</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="itemSuffix" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemList" class="col-lg-2 control-label">Items</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="3" id="itemList"></textarea>
+                                <span class="help-block">One item per line. Each line will be inserted into the repeating markup (specified in the
+                                    Item Prefix and Item Suffix fields).</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="platform" class="col-lg-2 control-label">Platform</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" id="platform">
+                                    <option value="homebrewery">Homebrewery</option>
+                                    <option value="html">HTML</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Table Options</label>
+                            <div class="col-lg-10">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input id="createTable" type="checkbox" style="margin-top: 10px;" onchange="CreateTableCheckboxHandler(this)"> Create a table. </td>
+                                        </tr>
+                                        <tr id="tableOptions" class="text-muted">
+                                            <td class="col-lg-3">
+                                                <label>Columns</label>
+                                                <p>
+                                                    <select class="form-control" id="columnCount" disabled="">
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                    </select>
+                                                </p>
+                                            </td>
+                                            <td class="col-lg-1"></td>
+                                            <td class="col-lg-8">
+                                                <label>Options</label>
+                                                <p><input id="prefixCell" type="checkbox" style="margin-top: 10px;" disabled=""> Create cell for Item Prefix </p>
+                                                <p><input id="suffixCell" type="checkbox" style="margin-top: 10px;" disabled=""> Create cell for Item Suffix </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="button" class="btn btn-primary" id="btnGenerate" onclick="RunMagicalMarkupGenerator()">Generate</button>
+                                <button type="reset" class="btn btn-default" id="btnClear">Clear</button>
+                            </div>
+                        </div>
+                        <p>&nbsp;</p>
+                        <div class="col-lg-10 col-lg-offset-2">
+                        <div class="form-group panel panel-success">
+                            <div class="panel-heading">
+                                <span class="panel-title">Output</span>
+                                <span id="copyOutputSpan"><span id="copyOutputMessage" class="label">&nbsp;</span><i class="fa fa-clipboard" aria-hidden="true" id="copyOutput" onclick="CopyOutput()"></i></span>
+                            </div>
+                            <div class="panel-body">
+                                <textarea readonly class="form-control" rows="10" id="generatedOutput"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-4">
+                <h3>Supported Syntax</h3>
+                <div class="panel panel-primary">
+                        <div class="panel-heading panel-title">Cross-Platform</div>
+                <table class="table table-striped syntaxTable">
+                    <thead>
+                        <tr>
+                            <th>Effect</th>
+                            <th>Syntax</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Generate
+                                <br> Incrementing
+                                <br> Numbers
+                            </td>
+                            <td>
+                                <code>[numInc|<i>Increment</i>]</code>
+                                <br> i.e.
+                                <br>
+                                <code>[numInc|1]</code> = 1, 2, 3...
+                                <br>
+                                <code>[numInc|5]</code> = 5, 10, 15...</td>
+                        </tr>
+                        <tr>
+                            <td>Bold</td>
+                            <td>
+                                <code>[b]</code>text
+                                <code>[/b]</code>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Italics</td>
+                            <td>
+                                <code>[i]</code>text
+                                <code>[/i]</code>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                <div class="panel panel-primary"><div class="panel-title panel-heading">Homebrewery</div>
+                <table class="table table-striped syntaxTable">
+                    <thead>
+                        <tr>
+                            <th>Effect</th>
+                            <th>Syntax</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>--</td>
+                            <td>
+                                --
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+                <div class="panel panel-primary"><div class="panel-title panel-heading">HTML</div>
+                <table class="table table-striped syntaxTable">
+                    <thead>
+                        <tr>
+                            <th>Effect</th>
+                            <th>Syntax</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Underline</td>
+                            <td>
+                                <code>[u]</code>text
+                                <code>[/u]</code>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="res/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
