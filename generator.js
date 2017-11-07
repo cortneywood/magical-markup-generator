@@ -7,20 +7,20 @@ var HOMEBREWERY = 1;
 function CreateTableCheckboxHandler(chk) {
     var tableOptions = document.getElementById('tableOptions');
     var numColumns = document.getElementById('columnCount');
-    var prefixCell = document.getElementById('prefixCell');
-    var suffixCell = document.getElementById('suffixCell');
+    var prefixColumn = document.getElementById('prefixColumn');
+    var suffixColumn = document.getElementById('suffixColumn');
 
     if (chk.checked) {
         tableOptions.classList.remove("text-muted");
         Enable(numColumns);
-        Enable(prefixCell);
-        Enable(suffixCell);
+        Enable(prefixColumn);
+        Enable(suffixColumn);
     }
     else {
         tableOptions.classList.add("text-muted");
         Disable(numColumns);
-        Disable(prefixCell);
-        Disable(suffixCell);
+        Disable(prefixColumn);
+        Disable(suffixColumn);
     }
 
     function Enable(control) { control.removeAttribute("disabled"); }
@@ -288,12 +288,12 @@ function RunMagicalMarkupGenerator() {
                     rows[i] += Syntax.Table.CellOpen;
                     rows[i] += ApplyIncrement(ParseOptions.ItemPrefix, currentItem);
 
-                    if (ParseOptions.TableOptions.PrefixCell && ParseOptions.ItemPrefix.Text != "")
+                    if (ParseOptions.TableOptions.PrefixColumn && ParseOptions.ItemPrefix.Text != "")
                         rows[i] += (Syntax.Table.CellClose + Syntax.Table.CellOpen);
 
                     rows[i] += ParseOptions.ItemList[currentItem];
 
-                    if (ParseOptions.TableOptions.SuffixCell && ParseOptions.ItemSuffix.Text != "")
+                    if (ParseOptions.TableOptions.SuffixColumn && ParseOptions.ItemSuffix.Text != "")
                         rows[i] += (Syntax.Table.CellClose + Syntax.Table.CellOpen);
 
                     rows[i] += ApplyIncrement(ParseOptions.ItemSuffix, currentItem);
@@ -357,8 +357,8 @@ function ReadFormData() {
     result.CreateTable = document.getElementById('createTable').checked;
     result.TableOptions = {
         ColumnCount: parseInt(document.getElementById('columnCount').value),
-        PrefixCell: document.getElementById('prefixCell').checked,
-        SuffixCell: document.getElementById('suffixCell').checked
+        PrefixColumn: document.getElementById('prefixColumn').checked,
+        SuffixColumn: document.getElementById('suffixColumn').checked
     }
 
     return result;
